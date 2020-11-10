@@ -1,5 +1,6 @@
 material {
     name : BakedTexture,
+    flipUV : true,
     parameters : [
         {
             type : sampler2d,
@@ -15,6 +16,7 @@ material {
 fragment {
     void material(inout MaterialInputs material) {
         prepareMaterial(material);
-        material.baseColor.rgb = texture(materialParams_albedo, getUV0()).rgb;
+        material.baseColor.rgb = inverseTonemap(texture(materialParams_albedo, getUV0()).rgb);
+        material.baseColor.a = 1.0;
     }
 }

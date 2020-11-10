@@ -90,6 +90,11 @@ public:
     void setWindowTitle(const char* title) { mWindowTitle = title; }
     float& getCameraFocalLength() { return mCameraFocalLength; }
 
+    // using float3 = filament::math::float3;
+    // void getCameraLookAt(float3* eye, float3* center, float3* up) {
+    //     window->mMainCameraMan->getLookAt(&eye, &center, &up);
+    // }
+
     void addOffscreenView(filament::View* view) { mOffscreenViews.push_back(view); }
 
     size_t getSkippedFrameCount() const { return mSkippedFrames; }
