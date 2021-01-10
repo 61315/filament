@@ -51,7 +51,7 @@ add_library(${TARGET} STATIC ${PRIVATE_HDRS} ${PUBLIC_HDRS} ${SRCS})
 
 target_link_libraries(${TARGET} PUBLIC z)
 
-if (LINUX_AARCH64)
+if (AARCH64)
     target_compile_definitions(${TARGET} PRIVATE PNG_ARM_NEON_OPT=0)
 endif()
 
