@@ -148,10 +148,14 @@ add_library(${TARGET} SHARED ${SRCS})
 target_link_libraries(${TARGET} ${EXTRA_LIBS})
 
 if(NOT MSVC)
+    if(NOT AARCH64)
+        target_compile_options(${TARGET}
+            PRIVATE -msse2
+            PRIVATE -msse
+            PRIVATE -mmmx
+        )
+    endif()
     target_compile_options(${TARGET}
-        PRIVATE -msse2
-        PRIVATE -msse
-        PRIVATE -mmmx
         PRIVATE -Wno-unused-variable
         PRIVATE -Wno-deprecated-declarations
         PRIVATE -Wno-switch
@@ -174,4 +178,7 @@ if (WIN32)
     endif()
 else()
     target_compile_options(${TARGET} PRIVATE -fvisibility=hidden)
+    if(AARCH64)
+        target_compile_definitions(${TARGET} PRIVATE SDL_ATOMIC_DISABLED=1)
+    endif()
 endif()
